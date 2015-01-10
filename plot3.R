@@ -1,7 +1,7 @@
-
-# before running this program, run Homework1.R one time.  It will
-# download data from the URL specified in the homework instructions
-# and process the data into a clean form read for analysis
+#this program generates plot3.png.
+#it will download and process the data, only if that has not been done already.
+#if needed, source the program to get the data.
+if (!(exists("tab.head"))) source("Homework1.R")
 
 png(filename = 
     "plot3.png", width = 480, height = 480,bg = "white",  res = NA  )

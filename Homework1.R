@@ -2,7 +2,7 @@
 # homework assignment 1 in "Exploratory Data Analysis"
 # it downloads the specified data and processes it into 
 # a clean data file called tab.head.
-# plots are generated from this data by:
+# plots can be generated from this data by the following programs:
 # screen plots - Homework1 testplots.R
 # png plots - plot1.R, plot2.R, plot3.R, plot4.R
 
@@ -16,16 +16,22 @@ zipFile<- download.file(zipURL, dest="household_power_consumption.zip",method="c
 # unzip the file
 unzip("./household_power_consumption.zip", overwrite = TRUE, exdir = "./", unzip="internal")
 
-# per homework instruction suggestion, I used grep to subset the data before reading with R
-# use the Mac OS X shell (terminal).  I headed the file and created a script using grep to select (feb 1 and 2 of 2007)
-# the shell script was created with vi and called "./subset".
+# per homework instruction suggestion, I subset the data before reading with R
+# I examined the raw data file and 
+# created a script using grep to select (feb 1 and 2 of 2007)
+# the shell script was created with vi initially and called "./subset".
 #  chmod 777 ./subset was used to make the script executable
-#  cat ./subset
-#    grep '^[12]/2/2007' household_power_consumption.txt > feb-1and2-2007.txt
-#    head -1 household_power_consumption.txt > colnames.txt
-#    cat colnames.txt feb-1and2-2007.txt > proj1-input.txt
-# the following command runs the subseting command from this R program
-system("./subset")
+# below I automate the process of creating the shell script.
+
+#create a shell script that can extract the desired data
+a1="grep '^[12]/2/2007' household_power_consumption.txt > feb-1and2-2007.txt"
+a2="head -1 household_power_consumption.txt > colnames.txt"
+a3="cat colnames.txt feb-1and2-2007.txt > proj1-input.txt"
+cat(a1,"\n",a2,"\n",a3,file="subset.sh")
+# make the script executable
+system("chmod 777 subset.sh")
+# the following command runs the subseting script from this R program
+system("./subset.sh")
 
 # read the data subset into R
 tab.head2<-read.table("proj1-input.txt",sep=";",na.strings="?", header=TRUE)

@@ -1,5 +1,7 @@
-
-#You must run Homework1.R one time before running this code.
+#this program generates plot1-4 on the screen.
+#it will download and process the data, only if that has not been done already.
+#if needed, source the program to get the data.
+if (!(exists("tab.head"))) source("Homework1.R")
 # this program uses tab.head to create plots 1-4 on the screen
 
 #plot 1
